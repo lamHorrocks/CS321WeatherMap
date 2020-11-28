@@ -1,4 +1,36 @@
 
+/*
+ * Copyright (c) 2012 , 2013 Oracle and/or its affiliates.
+ * All rights reserved. Use is subject to license terms.
+ *
+ * This file is available and licensed under the following license:
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *  - Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the distribution.
+ *  - Neither the name of Oracle nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package weathersystem;
 
 import java.io.FileInputStream;
@@ -36,9 +68,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Sample application that shows examples of the different layout panes
- * provided by the JavaFX layout API.
- * The resulting UI is for demonstration purposes only and is not interactive.
+ * Weather application provides a map and weather data for select cities
+ * in northern Alabama.
  */
 public class WeatherSystem extends Application {
     
@@ -54,120 +85,24 @@ public class WeatherSystem extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-// Use a border pane as the root for scene
+        // Use a border pane as the root for scene
         BorderPane border = new BorderPane();
         
-        //HBox hbox = addHBox();
-        //border.setLeft(hbox);
-        //border.setLeft(addVBox());
+        //set weather pane
+        border.setRight(addWeatherPane());      
         
-// Add a stack to the HBox in the top region
-
-    //addStackPane(hbox);  
-    
-
-// To see only the grid in the center, uncomment the following statement
-// comment out the setCenter() call farther down        
-//        border.setCenter(addGridPane());
-        
-// Choose either a TilePane or FlowPane for right region and comment out the
-// one you aren't using        
-        //border.setLeft(addFlowPane());
-        //border.setRight(addTilePane());
-        border.setRight(addWeatherPane());
-
-        
-// To see only the grid in the center, comment out the following statement
-// If both setCenter() calls are executed, the anchor pane from the second
-// call replaces the grid from the first call        
+        //set map pane
         border.setLeft(addAnchorPane(addGridPane()));
 
+        //set title
         Scene scene = new Scene(border);
         stage.setScene(scene);
         stage.setTitle("North Alabama Weather");
         stage.show();
     }
 
-/*
- * Creates an HBox with two buttons for the top region
- */
     
-    private HBox addHBox() {
-
-        HBox hbox = new HBox();
-        hbox.setPadding(new Insets(15, 12, 15, 12));
-        hbox.setSpacing(10);   // Gap between nodes
-        hbox.setStyle("-fx-background-color: #336699;");
-
-        //Button buttonCurrent = new Button("Current");
-        //buttonCurrent.setPrefSize(100, 20);
-
-        //Button buttonProjected = new Button("Projected");
-        //buttonProjected.setPrefSize(100, 20);
-        
-        //hbox.getChildren().addAll(buttonCurrent, buttonProjected);
-        
-        return hbox;
-    }
-    
-/*
- * Creates a VBox with a list of links for the left region
- */
-    private VBox addVBox() {
-        
-        VBox vbox = new VBox();
-        vbox.setPadding(new Insets(10)); // Set all sides to 10
-        vbox.setSpacing(8);              // Gap between nodes
-
-        Text title = new Text("Data");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        vbox.getChildren().add(title);
-        
-        Hyperlink options[] = new Hyperlink[] {
-            new Hyperlink("Sales"),
-            new Hyperlink("Marketing"),
-            new Hyperlink("Distribution"),
-            new Hyperlink("Costs")};
-
-        for (int i=0; i<4; i++) {
-            // Add offset to left side to indent from title
-            VBox.setMargin(options[i], new Insets(0, 0, 0, 8));
-            vbox.getChildren().add(options[i]);
-        }
-        
-        return vbox;
-    }
-
-/*
- * Uses a stack pane to place links over map
- * 
- * @param hb HBox to add the stack to
- */
-    private void addStackPane(HBox hb) {
-
-        StackPane stack = new StackPane();
-
-        Hyperlink huntsville = new Hyperlink("Huntsville");
-         
-        
-        //Text helpText = new Text("Huntsvillexxxxxxxxxxxxxx");
-        //helpText.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-        //helpText.setFill(Color.WHITE);
-        //helpText.setStroke(Color.web("#7080A0")); 
-        
-        //stack.getChildren().addAll(helpIcon, helpText);
-        stack.getChildren().addAll(huntsville);
-        stack.setAlignment(Pos.TOP_LEFT);
-        // Add offset to right for question mark to compensate for RIGHT 
-        // alignment of all nodes
-        StackPane.setMargin(huntsville, new Insets(0, 10, 0, 0));
-        
-        hb.getChildren().add(stack);
-        HBox.setHgrow(stack, Priority.ALWAYS);
-                
-    }
-
-/*
+/**
  * Creates a grid for the map
  */
     private GridPane addGridPane() throws IOException {
@@ -178,7 +113,6 @@ public class WeatherSystem extends Application {
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
         // Map
-        //TODO: erase city names from map.png
         String image_path = "map.png";
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageMap = new ImageView(new Image(stream, 900, 900, true, true));
@@ -189,7 +123,7 @@ public class WeatherSystem extends Application {
         return grid;
     }
 
-    /*
+ /**
  * Creates a weather pane for the map
  */
     private GridPane addWeatherPane() throws IOException {
@@ -211,60 +145,10 @@ public class WeatherSystem extends Application {
         return grid;
     }
     
-/*
- * Creates a horizontal flow pane with eight icons in four rows
- */
-    private FlowPane addFlowPane() throws IOException {
-
-        FlowPane flow = new FlowPane();
-        flow.setPadding(new Insets(5, 0, 5, 0));
-        flow.setVgap(4);
-        flow.setHgap(4);
-        flow.setPrefWrapLength(170); // preferred width allows for two columns
-        flow.setStyle("-fx-background-color: DAE6F3;");
-
-       
-        ImageView pages[] = new ImageView[8];
-        String path;
-        for (int i=0; i<8; i++) {
-            //path = "chart_"+(i+1)+".png";
-            path = "chart_"+(i+1)+".png";
-            try (InputStream stream = new FileInputStream(path)) {
-                pages[i] = new ImageView(new Image(stream));
-                flow.getChildren().add(pages[i]);
-            }
-        }
-
-        return flow;
-    }
-    
-/*
- * Creates a horizontal (default) tile pane with eight icons in four rows
- */
-    private TilePane addTilePane() throws IOException {
-        
-        TilePane tile = new TilePane();
-        tile.setPadding(new Insets(5, 0, 5, 0));
-        tile.setVgap(4);
-        tile.setHgap(4);
-        tile.setPrefColumns(2);
-        tile.setStyle("-fx-background-color: DAE6F3;");
-
-        ImageView pages[] = new ImageView[8];
-        String path;
-        for (int i=0; i<8; i++) {
-            path = "chart_"+(i+1)+".png";
-            try (InputStream stream = new FileInputStream(path)) {
-                pages[i] = new ImageView(new Image(stream));
-                tile.getChildren().add(pages[i]);
-            }
-        }
-
-        return tile;
-    }
  
-/*
- * Creates an anchor pane using the provided grid and an HBox with buttons
+/**
+ * Creates an anchor pane using the provided grid and an HBox with buttons or 
+ * hyperlinks and adds city links to map
  * 
  * @param grid Grid to anchor to the top of the anchor pane
  */
@@ -277,8 +161,6 @@ public class WeatherSystem extends Application {
         Hyperlink fortpayne = new Hyperlink("Fort Payne");
         Hyperlink gadsden = new Hyperlink("Gadsden");
         
-
-        
         HBox hb = new HBox();
         hb.setPadding(new Insets(0, 10, 10, 10));
         hb.setSpacing(10);
@@ -290,13 +172,9 @@ public class WeatherSystem extends Application {
         hb.setMargin(gadsden, new Insets(200, 200, 200, 200)); 
         
         fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        gadsden.setOnAction(e -> System.out.println("Hyperlink clicked"));
 
-        anchorpane.getChildren().addAll(grid,hb);
-        
-        // Anchor buttons to bottom right, anchor grid to top
-        //AnchorPane.setBottomAnchor(hb, 8.0);
-        //AnchorPane.setRightAnchor(hb, 5.0);
-        //AnchorPane.setTopAnchor(grid, 10.0);
+        anchorpane.getChildren().addAll(grid,hb);       
 
         return anchorpane;
     }
