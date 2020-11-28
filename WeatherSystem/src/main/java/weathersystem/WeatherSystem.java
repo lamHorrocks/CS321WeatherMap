@@ -44,6 +44,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -92,7 +93,7 @@ public class WeatherSystem extends Application {
         border.setRight(addWeatherPane());      
         
         //set map pane
-        border.setLeft(addAnchorPane(addGridPane()));
+        border.setLeft(addCityPane(addMapPane()));
 
         //set title
         Scene scene = new Scene(border);
@@ -105,7 +106,7 @@ public class WeatherSystem extends Application {
 /**
  * Creates a grid for the map
  */
-    private GridPane addGridPane() throws IOException {
+    private GridPane addMapPane() throws IOException {
 
         GridPane grid = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
@@ -124,35 +125,12 @@ public class WeatherSystem extends Application {
     }
 
  /**
- * Creates a weather pane for the map
- */
-    private GridPane addWeatherPane() throws IOException {
-
-        GridPane grid = new GridPane();
-        ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(0);
-        grid.getColumnConstraints().addAll(column1); // each get 50% of width
-
-        //remove this image when implementing weather data
-        String image_path = "weatherholder.png";
-        try (InputStream stream = new FileInputStream(image_path)) {
-            ImageView imageMap = new ImageView(new Image(stream, 480, 480, true, true));
-            grid.add(imageMap, 4, 4);   
-        }
-        //end remove
-        
-        grid.setGridLinesVisible(true);
-        return grid;
-    }
-    
- 
-/**
  * Creates an anchor pane using the provided grid and an HBox with buttons or 
  * hyperlinks and adds city links to map
  * 
  * @param grid Grid to anchor to the top of the anchor pane
  */
-    private AnchorPane addAnchorPane(GridPane grid) {
+    private AnchorPane addCityPane(GridPane grid) {
 
         AnchorPane anchorpane = new AnchorPane();
 
@@ -178,5 +156,42 @@ public class WeatherSystem extends Application {
 
         return anchorpane;
     }
+    
+ /**
+ * Creates a weather pane for the map
+ */
+    private GridPane addWeatherPane() throws IOException {
+
+        GridPane grid = new GridPane();
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(0);
+        grid.getColumnConstraints().addAll(column1); // each get 50% of width
+
+        // Category in column 2, row 1
+        Text category = new Text("Sales:");
+        category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        grid.add(category, 1, 0); 
+
+        // Title in column 3, row 1
+        Text chartTitle = new Text("Current Year");
+        chartTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        grid.add(chartTitle, 2, 0);
+        
+        // Subtitle in columns 2-3, row 2
+        Text chartSubtitle = new Text("Goods and Services");
+        grid.add(chartSubtitle, 1, 1, 2, 1);
+        
+        // House icon in column 1, rows 1-2
+        String image_path = "sunny.png";
+        try (InputStream stream = new FileInputStream(image_path)) {
+            ImageView imageHouse = new ImageView(new Image(stream));
+            grid.add(imageHouse, 0, 0, 1, 2);
+        }
+
+        grid.setGridLinesVisible(true);
+        return grid;
+    }
+    
+    
 }
 
