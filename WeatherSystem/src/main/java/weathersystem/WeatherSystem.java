@@ -12,6 +12,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -270,19 +271,28 @@ public class WeatherSystem extends Application {
     private AnchorPane addAnchorPane(GridPane grid) {
 
         AnchorPane anchorpane = new AnchorPane();
+
+        Button hamilton = new Button("Hamilton");
+        Button florence = new Button("Florence");
+        Hyperlink fortpayne = new Hyperlink("Fort Payne");
+        Hyperlink gadsden = new Hyperlink("Gadsden");
         
-        //Button buttonSave = new Button("Save");
-        //Button buttonCancel = new Button("Cancel");
 
         
         HBox hb = new HBox();
-        //hb.setPadding(new Insets(0, 10, 10, 10));
-        //hb.setSpacing(10);
-        //hb.getChildren().addAll(buttonSave, buttonCancel);
+        hb.setPadding(new Insets(0, 10, 10, 10));
+        hb.setSpacing(10);
+        hb.getChildren().addAll(hamilton, florence, fortpayne, gadsden);
+
+        hb.setMargin(hamilton, new Insets(20, 20, 20, 20)); 
+        hb.setMargin(florence, new Insets(30, 20, 20, 20)); 
+        hb.setMargin(fortpayne, new Insets(50, 20, 20, 20)); 
+        hb.setMargin(gadsden, new Insets(200, 200, 200, 200)); 
         
-        addStackPane(hb);
+        fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
 
         anchorpane.getChildren().addAll(grid,hb);
+        
         // Anchor buttons to bottom right, anchor grid to top
         //AnchorPane.setBottomAnchor(hb, 8.0);
         //AnchorPane.setRightAnchor(hb, 5.0);
@@ -291,3 +301,4 @@ public class WeatherSystem extends Application {
         return anchorpane;
     }
 }
+
