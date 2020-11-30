@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2012 , 2013 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
@@ -68,6 +67,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Weather application provides a map and weather data for select cities
@@ -133,7 +135,7 @@ public class WeatherSystem extends Application {
  */
     private AnchorPane addCityPane(GridPane pane) {
 
-        AnchorPane anchorpane = new AnchorPane();
+ AnchorPane anchorpane = new AnchorPane();
 
         Hyperlink hamilton = new Hyperlink("Hamilton");
         Hyperlink florence = new Hyperlink("Florence");
@@ -191,37 +193,47 @@ public class WeatherSystem extends Application {
  */
     private GridPane addWeatherPane() throws IOException {
 
+        
+        DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
+    	String dateString = dateFormat.format(new Date()).toString();  
+   
         GridPane grid = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(0);
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
-        // city
-        Text city = new Text("City, AL Weather");
-        city.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        // Category in column 1, row 1
+        Text city = new Text("Huntsvile, AL Weather");
+        city.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(city, 0, 0); 
         
-        // time
-        Text time = new Text("as of time CST");
-        time.setFont(Font.font("Arial", FontWeight.BOLD, 10));
-        grid.add(time, 0, 1); 
+        Text currentTime = new Text("as of " + dateString + " CST");
+        currentTime.setFont(Font.font("Arial", FontWeight.LIGHT, 11));
+        grid.add(currentTime, 0, 1); 
         
-        // temp
-        Text temp = new Text("51 deg");
-        temp.setFont(Font.font("Arial", FontWeight.BOLD, 70));
-        grid.add(temp, 0, 3);     
+        Text currentTemp = new Text("51\u00B0");
+        currentTemp.setFont(Font.font("Arial", FontWeight.BOLD, 55));
+        grid.add(currentTemp, 0, 2, 2, 3); 
         
-        // current conditions icon
+        Text currentDesc = new Text("Clear");
+        currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(currentDesc, 0, 5); 
+        
+        Text currentWeatherUpdate = new Text("5% chance of rain through 8 pm");
+        currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        grid.add(currentWeatherUpdate, 0, 6); 
+
+        // House icon in column 1, rows 1-2
         String image_path = "sunny.png";
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageHouse = new ImageView(new Image(stream));
-            grid.add(imageHouse, 3, 3, 1, 2);
+            grid.add(imageHouse, 1, 2, 2, 3);
         }
 
-        grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(false);
+        
         return grid;
     }
     
     
 }
-
