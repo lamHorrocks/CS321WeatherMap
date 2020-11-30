@@ -93,7 +93,8 @@ public class WeatherSystem extends Application {
         BorderPane border = new BorderPane();
         
         //set weather pane
-        border.setRight(addWeatherPane());      
+        GridPane weathergrid = addWeatherPane();
+        border.setRight(weathergrid);      
         
         //set map pane
         border.setLeft(addCityPane(addMapPane()));
@@ -135,7 +136,7 @@ public class WeatherSystem extends Application {
  */
     private AnchorPane addCityPane(GridPane pane) {
 
- AnchorPane anchorpane = new AnchorPane();
+        AnchorPane anchorpane = new AnchorPane();
 
         Hyperlink hamilton = new Hyperlink("Hamilton");
         Hyperlink florence = new Hyperlink("Florence");
