@@ -68,6 +68,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Weather application provides a map and weather data for select cities
@@ -191,16 +194,36 @@ public class WeatherSystem extends Application {
  */
     private GridPane addWeatherPane() throws IOException {
 
+        
+        DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
+    	String dateString = dateFormat.format(new Date()).toString();  
+   
         GridPane grid = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(0);
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
-        // Category in column 2, row 1
-        Text category = new Text("Sales:");
-        category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        grid.add(category, 1, 0); 
-
+        // Category in column 1, row 1
+        Text city = new Text("Huntsvile, AL Weather");
+        city.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(city, 0, 0); 
+        
+        Text currentTime = new Text("as of " + dateString + " CST");
+        currentTime.setFont(Font.font("Arial", FontWeight.LIGHT, 11));
+        grid.add(currentTime, 0, 1); 
+        
+        Text currentTemp = new Text("51\u00B0");
+        currentTemp.setFont(Font.font("Arial", FontWeight.BOLD, 55));
+        grid.add(currentTemp, 0, 2, 2, 3); 
+        
+        Text currentDesc = new Text("Clear");
+        currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(currentDesc, 0, 5); 
+        
+        Text currentWeatherUpdate = new Text("5% chance of rain through 8 pm");
+        currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        grid.add(currentWeatherUpdate, 0, 6); 
+        /*
         // Title in column 3, row 1
         Text chartTitle = new Text("Current Year");
         chartTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -209,15 +232,16 @@ public class WeatherSystem extends Application {
         // Subtitle in columns 2-3, row 2
         Text chartSubtitle = new Text("Goods and Services");
         grid.add(chartSubtitle, 1, 1, 2, 1);
-        
+        */
         // House icon in column 1, rows 1-2
         String image_path = "sunny.png";
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageHouse = new ImageView(new Image(stream));
-            grid.add(imageHouse, 0, 0, 1, 2);
+            grid.add(imageHouse, 1, 2, 2, 3);
         }
 
-        grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(false);
+        
         return grid;
     }
     
