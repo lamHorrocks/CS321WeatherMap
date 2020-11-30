@@ -195,7 +195,7 @@ public class WeatherSystem extends Application {
 
         
         DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
-    	String dateString = dateFormat.format(new Date()).toString();  
+    	sTime = dateFormat.format(new Date());  
    
         GridPane grid = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
@@ -203,28 +203,28 @@ public class WeatherSystem extends Application {
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
         // Category in column 1, row 1
-        Text city = new Text("Huntsvile, AL Weather");
+        Text city = new Text(sCity + ", AL Weather");
         city.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(city, 0, 0); 
         
-        Text currentTime = new Text("as of " + dateString + " CST");
+        Text currentTime = new Text("as of " + sTime + " CST");
         currentTime.setFont(Font.font("Arial", FontWeight.LIGHT, 11));
         grid.add(currentTime, 0, 1); 
         
-        Text currentTemp = new Text("51\u00B0");
+        Text currentTemp = new Text(sTemp + "\u00B0");
         currentTemp.setFont(Font.font("Arial", FontWeight.BOLD, 55));
         grid.add(currentTemp, 0, 2, 2, 3); 
         
-        Text currentDesc = new Text("Clear");
+        Text currentDesc = new Text(sCondition);
         currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(currentDesc, 0, 5); 
         
-        Text currentWeatherUpdate = new Text("5% chance of rain through 8 pm");
+        Text currentWeatherUpdate = new Text(sWeather);
         currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
         grid.add(currentWeatherUpdate, 0, 6); 
 
         // House icon in column 1, rows 1-2
-        String image_path = "sunny.png";
+        String image_path = sImage;
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageHouse = new ImageView(new Image(stream));
             grid.add(imageHouse, 1, 2, 2, 3);
@@ -235,5 +235,11 @@ public class WeatherSystem extends Application {
         return grid;
     }
     
+    private String sCity = "Huntsville";
+    private String sTime = "";
+    private String sTemp = "70";
+    private String sCondition = "Clear";
+    private String sWeather = "5% chance of rain through 8 pm";
+    private String sImage = "sunny.png";
     
 }
