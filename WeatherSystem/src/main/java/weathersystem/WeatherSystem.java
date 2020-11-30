@@ -53,6 +53,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -130,30 +131,58 @@ public class WeatherSystem extends Application {
  * 
  * @param grid Grid to anchor to the top of the anchor pane
  */
-    private AnchorPane addCityPane(GridPane grid) {
+    private AnchorPane addCityPane(Pane pane) {
 
         AnchorPane anchorpane = new AnchorPane();
 
-        Button hamilton = new Button("Hamilton");
-        Button florence = new Button("Florence");
+        Hyperlink hamilton = new Hyperlink("Hamilton");
+        Hyperlink florence = new Hyperlink("Florence");
+        Hyperlink huntsville = new Hyperlink("Huntsville");
+        Hyperlink decatur = new Hyperlink("Decatur");
+        Hyperlink scottsboro = new Hyperlink("Scottsboro");
+        Hyperlink cullman = new Hyperlink("Cullman");
         Hyperlink fortpayne = new Hyperlink("Fort Payne");
         Hyperlink gadsden = new Hyperlink("Gadsden");
         
-        HBox hb = new HBox();
-        hb.setPadding(new Insets(0, 10, 10, 10));
-        hb.setSpacing(10);
-        hb.getChildren().addAll(hamilton, florence, fortpayne, gadsden);
-
-        hb.setMargin(hamilton, new Insets(20, 20, 20, 20)); 
-        hb.setMargin(florence, new Insets(30, 20, 20, 20)); 
-        hb.setMargin(fortpayne, new Insets(50, 20, 20, 20)); 
-        hb.setMargin(gadsden, new Insets(200, 200, 200, 200)); 
+        Pane hb = new Pane();
         
+        hb.getChildren().addAll(hamilton, florence, huntsville, decatur, scottsboro, cullman, fortpayne, gadsden);
+
+        
+        hamilton.relocate(50,310);
+        hamilton.setFont(Font.font("Arial", 18));
+        
+        florence.relocate(140,66);
+        florence.setFont(Font.font("Arial", 18));
+        
+        huntsville.relocate(465,93);
+        huntsville.setFont(Font.font("Arial", 18));
+        
+        decatur.relocate(50,310);
+        decatur.setFont(Font.font("Arial", 18));
+        
+        scottsboro.relocate(650,113);
+        scottsboro.setFont(Font.font("Arial", 18));
+        
+        cullman.relocate(50,310);
+        cullman.setFont(Font.font("Arial", 18));
+        
+        fortpayne.relocate(50,310);
+        fortpayne.setFont(Font.font("Arial", 18));
+        
+        gadsden.relocate(50,310);
+        gadsden.setFont(Font.font("Arial", 18));
+        
+        hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        florence.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        huntsville.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        decatur.setOnAction(e -> System.out.println("Hyperlink clicked"));        
+        scottsboro.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        cullman.setOnAction(e -> System.out.println("Hyperlink clicked"));        
         fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
         gadsden.setOnAction(e -> System.out.println("Hyperlink clicked"));
-
-        anchorpane.getChildren().addAll(grid,hb);       
-
+        
+        anchorpane.getChildren().addAll(pane,hb);
         return anchorpane;
     }
     
