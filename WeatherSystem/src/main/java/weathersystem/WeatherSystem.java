@@ -170,7 +170,7 @@ public class WeatherSystem extends Application {
         fortpayne.relocate(50,310);
         fortpayne.setFont(Font.font("Arial", 18));
         
-        gadsden.relocate(50,310);
+        gadsden.relocate(670,360);
         gadsden.setFont(Font.font("Arial", 18));
         
         hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
@@ -196,25 +196,26 @@ public class WeatherSystem extends Application {
         column1.setPercentWidth(0);
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
-        // Category in column 2, row 1
-        Text category = new Text("Sales:");
-        category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        grid.add(category, 1, 0); 
-
-        // Title in column 3, row 1
-        Text chartTitle = new Text("Current Year");
-        chartTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        grid.add(chartTitle, 2, 0);
+        // city
+        Text city = new Text("City, AL Weather");
+        city.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        grid.add(city, 0, 0); 
         
-        // Subtitle in columns 2-3, row 2
-        Text chartSubtitle = new Text("Goods and Services");
-        grid.add(chartSubtitle, 1, 1, 2, 1);
+        // time
+        Text time = new Text("as of time CST");
+        time.setFont(Font.font("Arial", FontWeight.BOLD, 10));
+        grid.add(time, 0, 1); 
         
-        // House icon in column 1, rows 1-2
+        // temp
+        Text temp = new Text("51 deg");
+        temp.setFont(Font.font("Arial", FontWeight.BOLD, 70));
+        grid.add(temp, 0, 3);     
+        
+        // current conditions icon
         String image_path = "sunny.png";
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageHouse = new ImageView(new Image(stream));
-            grid.add(imageHouse, 0, 0, 1, 2);
+            grid.add(imageHouse, 3, 3, 1, 2);
         }
 
         grid.setGridLinesVisible(true);
