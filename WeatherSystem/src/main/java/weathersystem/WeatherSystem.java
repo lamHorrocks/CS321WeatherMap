@@ -131,7 +131,7 @@ public class WeatherSystem extends Application {
  * 
  * @param grid Grid to anchor to the top of the anchor pane
  */
-    private AnchorPane addCityPane(Pane pane) {
+    private AnchorPane addCityPane(GridPane pane) {
 
         AnchorPane anchorpane = new AnchorPane();
 
