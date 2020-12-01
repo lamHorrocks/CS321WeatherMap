@@ -194,13 +194,14 @@ public class WeatherSystem extends Application {
  */
     private GridPane addWeatherPane() throws IOException {
 
-        
         DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
     	sTime = dateFormat.format(new Date());  
    
         GridPane grid = new GridPane();
-        ColumnConstraints column1 = new ColumnConstraints();
+        ColumnConstraints column1 = new ColumnConstraints();    
         column1.setPercentWidth(0);
+
+    
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
         // Category in column 1, row 1
@@ -220,10 +221,22 @@ public class WeatherSystem extends Application {
         currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(currentDesc, 0, 5); 
         
-        Text currentWeatherUpdate = new Text(sWeather);
+        Text currentWeatherUpdate = new Text(sWeather + "\n\n\n\n\n\n\n");
         currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
         grid.add(currentWeatherUpdate, 0, 6); 
-
+         
+        Text currentForecast = new Text(sForecast + "\n");
+        currentForecast.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(currentForecast, 0, 9);
+        
+        Text currentMorningAfternoonForecast = new Text("Morning\t\tAfternoon\n" + "60\u00B0\t\t\t72\u00B0");
+        currentMorningAfternoonForecast.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        grid.add(currentMorningAfternoonForecast, 0, 10);
+                   
+        Text currentEveningForecast = new Text("Evening\t\tOvernight\n" + "60\u00B0\t\t\t72\u00B0");
+        currentEveningForecast.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        grid.add(currentEveningForecast, 1, 10);
+        
         // House icon in column 1, rows 1-2
         String image_path = sImage;
         try (InputStream stream = new FileInputStream(image_path)) {
