@@ -128,7 +128,7 @@ public class WeatherSystem extends Application {
         return grid;
     }
 
- /**
+/**
  * Creates an anchor pane using the provided grid and an HBox with buttons or 
  * hyperlinks and adds city links to map
  * 
@@ -138,20 +138,21 @@ public class WeatherSystem extends Application {
 
         AnchorPane anchorpane = new AnchorPane();
 
-        Hyperlink hamilton = new Hyperlink("Hamilton");
-        Hyperlink florence = new Hyperlink("Florence");
-        Hyperlink huntsville = new Hyperlink("Huntsville");
-        Hyperlink decatur = new Hyperlink("Decatur");
-        Hyperlink scottsboro = new Hyperlink("Scottsboro");
-        Hyperlink cullman = new Hyperlink("Cullman");
-        Hyperlink fortpayne = new Hyperlink("Fort Payne");
-        Hyperlink gadsden = new Hyperlink("Gadsden");
+        //Creates all buttons that represent the 
+        Button hamilton = new Button("Hamilton");
+        Button florence = new Button("Florence");
+        Button huntsville = new Button("Huntsville");
+        Button decatur = new Button("Decatur");
+        Button scottsboro = new Button("Scottsboro");
+        Button cullman = new Button("Cullman");
+        Button fortpayne = new Button("Fort Payne");
+        Button gadsden = new Button("Gadsden");
         
         Pane hb = new Pane();
         
         hb.getChildren().addAll(hamilton, florence, huntsville, decatur, scottsboro, cullman, fortpayne, gadsden);
 
-        
+        //Set fonts and locations for all buttons on the map
         hamilton.relocate(50,310);
         hamilton.setFont(Font.font("Arial", 18));
         
@@ -176,6 +177,8 @@ public class WeatherSystem extends Application {
         gadsden.relocate(655,357);
         gadsden.setFont(Font.font("Arial", 18));
         
+        
+        //On clicked functionality for the buttons
         hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
         florence.setOnAction(e -> System.out.println("Hyperlink clicked"));
         huntsville.setOnAction(e -> System.out.println("Hyperlink clicked"));
@@ -185,7 +188,10 @@ public class WeatherSystem extends Application {
         fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
         gadsden.setOnAction(e -> System.out.println("Hyperlink clicked"));
         
+        
+        //Adds all of the buttons to the pane
         anchorpane.getChildren().addAll(pane,hb);
+        
         return anchorpane;
     }
     
