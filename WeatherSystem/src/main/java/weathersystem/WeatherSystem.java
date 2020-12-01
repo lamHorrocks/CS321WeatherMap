@@ -229,12 +229,14 @@ public class WeatherSystem extends Application {
         currentForecast.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(currentForecast, 0, 9);
         
-        Text currentMorningAfternoonForecast = new Text("Morning\t\tAfternoon\n" + "60\u00B0\t\t\t72\u00B0");
-        currentMorningAfternoonForecast.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        Text currentMorningAfternoonForecast = new Text("Morning\t\tAfternoon\n" + morningTemp + "\u00B0\t\t\t" 
+                + afternoonTemp + "\u00B0");
+        currentMorningAfternoonForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         grid.add(currentMorningAfternoonForecast, 0, 10);
                    
-        Text currentEveningForecast = new Text("Evening\t\tOvernight\n" + "60\u00B0\t\t\t72\u00B0");
-        currentEveningForecast.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        Text currentEveningForecast = new Text("Evening\t\tOvernight\n" + eveningTemp + 
+                "\u00B0\t\t\t" + overnightTemp + "\u00B0");
+        currentEveningForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         grid.add(currentEveningForecast, 1, 10);
         
         // House icon in column 1, rows 1-2
@@ -255,5 +257,10 @@ public class WeatherSystem extends Application {
     private String sCondition = "Clear";
     private String sWeather = "5% chance of rain through 8 pm";
     private String sImage = "sunny.png";
+    private String sForecast = "Today's Forecast for \n" + sCity + ", AL";
+    private int morningTemp = 60; 
+    private int afternoonTemp = morningTemp + 6 ;
+    private int eveningTemp = morningTemp - 4;
+    private int overnightTemp = morningTemp - 14;
     
 }
