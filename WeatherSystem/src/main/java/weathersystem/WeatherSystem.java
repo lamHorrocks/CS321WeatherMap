@@ -161,19 +161,19 @@ public class WeatherSystem extends Application {
         huntsville.relocate(465,93);
         huntsville.setFont(Font.font("Arial", 18));
         
-        decatur.relocate(50,310);
+        decatur.relocate(360,139);
         decatur.setFont(Font.font("Arial", 18));
         
-        scottsboro.relocate(650,113);
+        scottsboro.relocate(640,114);
         scottsboro.setFont(Font.font("Arial", 18));
         
-        cullman.relocate(50,310);
+        cullman.relocate(400,297);
         cullman.setFont(Font.font("Arial", 18));
         
-        fortpayne.relocate(50,310);
+        fortpayne.relocate(725,199);
         fortpayne.setFont(Font.font("Arial", 18));
         
-        gadsden.relocate(670,360);
+        gadsden.relocate(655,357);
         gadsden.setFont(Font.font("Arial", 18));
         
         hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
