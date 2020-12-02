@@ -19,7 +19,7 @@ import com.jayway.jsonpath.*;
  */
 public class APIParser {
     
-    private String cityNames[] = {"Florence", "Hamilton", "Decatur", "Cullman", "Huntsville", "Scottsboro", "Fort Payne", "Gadsden"};
+    private final String cityNames[] = {"Florence", "Hamilton", "Decatur", "Cullman", "Huntsville", "Scottsboro", "Fort Payne", "Gadsden"};
     
     public WeatherData getCityForecast(String cityName){
         

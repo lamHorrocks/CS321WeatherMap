@@ -11,13 +11,13 @@ package weathersystem;
  */
 public class WeatherData {
     
-    private double temp;
-    private double tempMin;
-    private double tempMax;
-    private double windSpeed;
-    private double humidity;
-    private double clouds;
-    private String description;
+    private final double temp;
+    private final double tempMin;
+    private final double tempMax;
+    private final double windSpeed;
+    private final double humidity;
+    private final double clouds;
+    private final String description;
     
     public WeatherData(double temp, double tempMin, double tempMax, double windSpeed, double humidity, double clouds, String description){
         this.temp = temp;
