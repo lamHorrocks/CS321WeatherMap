@@ -187,8 +187,8 @@ public class WeatherSystem extends Application {
         ColumnConstraints column1 = new ColumnConstraints();    
         column1.setPercentWidth(0);
 
-    //Setting the padding  
-      weathergrid.setPadding(new Insets(10, 10, 10, 10)); 
+        //Setting the padding  
+        weathergrid.setPadding(new Insets(10, 10, 10, 10)); 
         weathergrid.getColumnConstraints().addAll(column1); // each get 50% of width
 
         // Category in column 1, row 1
@@ -227,34 +227,22 @@ public class WeatherSystem extends Application {
     private void setWeather(String cityName){
         
         WeatherData cityData = parser.getCityForecast(cityName);
-        if(cityData.getTemp() == 0.0)
-        {
-            System.out.println("REFRESH RATE MAX REACHED!");
-        }
-        else
-        {
         sCity = cityName;
-        sTemp = cityData.getTemp();
-        sCondition = cityData.getDescription();
-        maxTemp = cityData.getTempMax();
-        minTemp = cityData.getTempMin();
+        
+        //use old data if api has reached max tries
+        if(cityData.getTemp() != 0.0)
+        {
+            sTemp = cityData.getTemp();
+            sCondition = cityData.getDescription();
+            maxTemp = cityData.getTempMax();
+            minTemp = cityData.getTempMin();
         }
         
         weathergrid.getChildren().clear();
         addWeatherPane();
         border.setRight(weathergrid);
-
-        //System.out.println(sCity + "\n" + sTemp + "\n" + sCondition + "\n" + maxTemp + "\n" + minTemp + "\n" + humidity + "\n" + clouds + "\n" + windSpeed + "\n");
         
-    }
-
-    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
-            }
-        }
-    return null;
+       
     }
 
     private String sCity = "Huntsville";

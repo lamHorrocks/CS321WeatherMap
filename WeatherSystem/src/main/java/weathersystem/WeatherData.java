@@ -29,16 +29,6 @@ public class WeatherData {
         this.description = description;
     }
     
-    public void printInfo(){
-        System.out.println("temp: " + temp);
-        System.out.println("tempMin: " + tempMin);
-        System.out.println("tempMax: " + tempMax);
-        System.out.println("windSpeed: " + windSpeed);
-        System.out.println("humidity: " + humidity);
-        System.out.println("clouds: " + clouds);
-        System.out.println("description: " + description);
-    }
-    
     public double getTemp(){
         return this.temp;
     }

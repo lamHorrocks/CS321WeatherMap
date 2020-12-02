@@ -37,8 +37,7 @@ public class APIParser {
         try{
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             
-            String jsonresponse = response.body();
-            System.out.println(jsonresponse);            
+            String jsonresponse = response.body();          
             var parser = JsonPath.parse(jsonresponse);
             
             temp = parser.read("$.main.temp", Double.class);
@@ -49,8 +48,8 @@ public class APIParser {
             clouds = parser.read("$.clouds.all", Double.class);
             description = parser.read("$.weather[0].description");
         } catch(Exception e){
-            System.out.println("ERROR: Could not retrieve data, try again in one minute\n" + e);
-        }
+            throw new NullPointerException("\nLIMIT EXCEEDED: Maximum number of calls-per-minute to Weather API exceeded. Refresh occurs in one minute. Try again in one minute\n");
+    }
         
         WeatherData forecast = new WeatherData(temp, tempMin, tempMax, windSpeed, humidity, clouds, description);
         
