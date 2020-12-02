@@ -94,8 +94,7 @@ public class WeatherSystem extends Application {
         
         //set weather pane
         GridPane weathergrid = addWeatherPane();
-        border.setRight(weathergrid);      
-        
+        border.setRight(weathergrid);
         //set map pane
         border.setLeft(addCityPane(addMapPane()));
 
@@ -179,14 +178,14 @@ public class WeatherSystem extends Application {
         
         
         //On clicked functionality for the buttons
-        hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
-        florence.setOnAction(e -> System.out.println("Hyperlink clicked"));
-        huntsville.setOnAction(e -> System.out.println("Hyperlink clicked"));
-        decatur.setOnAction(e -> System.out.println("Hyperlink clicked"));        
-        scottsboro.setOnAction(e -> System.out.println("Hyperlink clicked"));
-        cullman.setOnAction(e -> System.out.println("Hyperlink clicked"));        
-        fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
-        gadsden.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        hamilton.setOnAction(e -> updateWeatherValues("Hamilton"));
+        florence.setOnAction(e -> updateWeatherValues("Florence"));
+        huntsville.setOnAction(e -> updateWeatherValues("Huntsville"));
+        decatur.setOnAction(e -> updateWeatherValues("Decatur"));        
+        scottsboro.setOnAction(e -> updateWeatherValues("Scottsboro"));
+        cullman.setOnAction(e -> updateWeatherValues("Cullman"));        
+        fortpayne.setOnAction(e -> updateWeatherValues("Fort Payne"));
+        gadsden.setOnAction(e -> updateWeatherValues("Gadsden"));
         
         
         //Adds all of the buttons to the pane
@@ -225,25 +224,16 @@ public class WeatherSystem extends Application {
         
         Text currentDesc = new Text(sCondition);
         currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-        grid.add(currentDesc, 0, 5); 
-        
-        Text currentWeatherUpdate = new Text(sWeather + "\n\n\n\n\n\n\n");
-        currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        grid.add(currentWeatherUpdate, 0, 6); 
+        grid.add(currentDesc, 0, 5);
          
         Text currentForecast = new Text(sForecast + "\n");
         currentForecast.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         grid.add(currentForecast, 0, 9);
         
-        Text currentMorningAfternoonForecast = new Text("Morning\t\tAfternoon\n" + morningTemp + "\u00B0\t\t\t" 
-                + afternoonTemp + "\u00B0");
-        currentMorningAfternoonForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
-        grid.add(currentMorningAfternoonForecast, 0, 10);
-                   
-        Text currentEveningForecast = new Text("Evening\t\tOvernight\n" + eveningTemp + 
-                "\u00B0\t\t\t" + overnightTemp + "\u00B0");
-        currentEveningForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
-        grid.add(currentEveningForecast, 1, 10);
+        Text currentTemps = new Text("Minimum Temperature\t\tMaximum Temperature\n" + minTemp + "\u00B0\t\t\t" 
+                + maxTemp + "\u00B0");
+        currentTemps.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        grid.add(currentTemps, 0, 10);
         
         // House icon in column 1, rows 1-2
         String image_path = sImage;
@@ -257,16 +247,34 @@ public class WeatherSystem extends Application {
         return grid;
     }
     
+    private void updateWeatherValues(String cityName){
+        
+        WeatherData cityData = parser.getCityForecast(cityName);
+        
+        sCity = cityName;
+        sTemp = cityData.getTemp();
+        sCondition = cityData.getDescription();
+        maxTemp = cityData.getTempMax();
+        minTemp = cityData.getTempMin();
+        humidity = cityData.getHumidity();
+        clouds = cityData.getClouds();
+        windSpeed = cityData.getWindSpeed();
+        
+        System.out.println(sCity + "\n" + sTemp + "\n" + sCondition + "\n" + maxTemp + "\n" + minTemp + "\n" + humidity + "\n" + clouds + "\n" + windSpeed + "\n");
+        
+    }
+    
     private String sCity = "Huntsville";
     private String sTime = "";
-    private String sTemp = "70";
+    private double sTemp = 60;
     private String sCondition = "Clear";
-    private String sWeather = "5% chance of rain through 8 pm";
     private String sImage = "sunny.png";
     private String sForecast = "Today's Forecast for \n" + sCity + ", AL";
-    private int morningTemp = 60; 
-    private int afternoonTemp = morningTemp + 6 ;
-    private int eveningTemp = morningTemp - 4;
-    private int overnightTemp = morningTemp - 14;
+    private double maxTemp = 0; 
+    private double minTemp = 0;
+    private double humidity = 0;
+    private double clouds = 0;
+    private double windSpeed = 0;
+    private APIParser parser = new APIParser();
     
 }
