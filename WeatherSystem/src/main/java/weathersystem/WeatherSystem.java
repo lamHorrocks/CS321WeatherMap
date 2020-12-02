@@ -227,12 +227,18 @@ public class WeatherSystem extends Application {
     private void setWeather(String cityName){
         
         WeatherData cityData = parser.getCityForecast(cityName);
-
+        if(cityData.getTemp() == 0.0)
+        {
+            System.out.println("REFRESH RATE MAX REACHED!");
+        }
+        else
+        {
         sCity = cityName;
         sTemp = cityData.getTemp();
         sCondition = cityData.getDescription();
         maxTemp = cityData.getTempMax();
         minTemp = cityData.getTempMin();
+        }
         
         weathergrid.getChildren().clear();
         addWeatherPane();
@@ -255,8 +261,8 @@ public class WeatherSystem extends Application {
     private String sTime = "";
     private double sTemp = 60;
     private String sCondition = "Clear";
-    private double maxTemp = 68; 
-    private double minTemp = 46;
+    private double maxTemp = 0; 
+    private double minTemp = 0;
     private final APIParser parser = new APIParser();
     private final GridPane weathergrid = new GridPane();;
     private final BorderPane border = new BorderPane();;
