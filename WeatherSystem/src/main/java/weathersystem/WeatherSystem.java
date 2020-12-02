@@ -39,7 +39,6 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.Node;
 import javafx.geometry.Insets; 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -249,8 +248,8 @@ public class WeatherSystem extends Application {
     private String sTime = "";
     private double sTemp = 60;
     private String sCondition = "Clear";
-    private double maxTemp = 0; 
-    private double minTemp = 0;
+    private double maxTemp = 68; 
+    private double minTemp = 47;
     private final APIParser parser = new APIParser();
     private final GridPane weathergrid = new GridPane();;
     private final BorderPane border = new BorderPane();;
