@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2012 , 2013 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
@@ -53,6 +52,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -67,6 +67,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.*;
 
 /**
@@ -91,7 +93,8 @@ public class WeatherSystem extends Application {
         BorderPane border = new BorderPane();
         
         //set weather pane
-        border.setRight(addWeatherPane());      
+        GridPane weathergrid = addWeatherPane();
+        border.setRight(weathergrid);      
         
         //set map pane
         border.setLeft(addCityPane(addMapPane()));
@@ -125,36 +128,70 @@ public class WeatherSystem extends Application {
         return grid;
     }
 
- /**
+/**
  * Creates an anchor pane using the provided grid and an HBox with buttons or 
  * hyperlinks and adds city links to map
  * 
  * @param grid Grid to anchor to the top of the anchor pane
  */
-    private AnchorPane addCityPane(GridPane grid) {
+    private AnchorPane addCityPane(GridPane pane) {
 
         AnchorPane anchorpane = new AnchorPane();
 
+        //Creates all buttons that represent the 
         Button hamilton = new Button("Hamilton");
         Button florence = new Button("Florence");
-        Hyperlink fortpayne = new Hyperlink("Fort Payne");
-        Hyperlink gadsden = new Hyperlink("Gadsden");
+        Button huntsville = new Button("Huntsville");
+        Button decatur = new Button("Decatur");
+        Button scottsboro = new Button("Scottsboro");
+        Button cullman = new Button("Cullman");
+        Button fortpayne = new Button("Fort Payne");
+        Button gadsden = new Button("Gadsden");
         
-        HBox hb = new HBox();
-        hb.setPadding(new Insets(0, 10, 10, 10));
-        hb.setSpacing(10);
-        hb.getChildren().addAll(hamilton, florence, fortpayne, gadsden);
+        Pane hb = new Pane();
+        
+        hb.getChildren().addAll(hamilton, florence, huntsville, decatur, scottsboro, cullman, fortpayne, gadsden);
 
-        hb.setMargin(hamilton, new Insets(20, 20, 20, 20)); 
-        hb.setMargin(florence, new Insets(30, 20, 20, 20)); 
-        hb.setMargin(fortpayne, new Insets(50, 20, 20, 20)); 
-        hb.setMargin(gadsden, new Insets(200, 200, 200, 200)); 
+        //Set fonts and locations for all buttons on the map
+        hamilton.relocate(50,310);
+        hamilton.setFont(Font.font("Arial", 18));
         
+        florence.relocate(140,66);
+        florence.setFont(Font.font("Arial", 18));
+        
+        huntsville.relocate(465,93);
+        huntsville.setFont(Font.font("Arial", 18));
+        
+        decatur.relocate(360,139);
+        decatur.setFont(Font.font("Arial", 18));
+        
+        scottsboro.relocate(640,114);
+        scottsboro.setFont(Font.font("Arial", 18));
+        
+        cullman.relocate(400,297);
+        cullman.setFont(Font.font("Arial", 18));
+        
+        fortpayne.relocate(725,199);
+        fortpayne.setFont(Font.font("Arial", 18));
+        
+        gadsden.relocate(655,357);
+        gadsden.setFont(Font.font("Arial", 18));
+        
+        
+        //On clicked functionality for the buttons
+        hamilton.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        florence.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        huntsville.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        decatur.setOnAction(e -> System.out.println("Hyperlink clicked"));        
+        scottsboro.setOnAction(e -> System.out.println("Hyperlink clicked"));
+        cullman.setOnAction(e -> System.out.println("Hyperlink clicked"));        
         fortpayne.setOnAction(e -> System.out.println("Hyperlink clicked"));
         gadsden.setOnAction(e -> System.out.println("Hyperlink clicked"));
-
-        anchorpane.getChildren().addAll(grid,hb);       
-
+        
+        
+        //Adds all of the buttons to the pane
+        anchorpane.getChildren().addAll(pane,hb);
+        
         return anchorpane;
     }
     
@@ -163,36 +200,73 @@ public class WeatherSystem extends Application {
  */
     private GridPane addWeatherPane() throws IOException {
 
+        DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
+    	sTime = dateFormat.format(new Date());  
+   
         GridPane grid = new GridPane();
-        ColumnConstraints column1 = new ColumnConstraints();
+        ColumnConstraints column1 = new ColumnConstraints();    
         column1.setPercentWidth(0);
+
+    
         grid.getColumnConstraints().addAll(column1); // each get 50% of width
 
-        // Category in column 2, row 1
-        Text category = new Text("Sales:");
-        category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        grid.add(category, 1, 0); 
-
-        // Title in column 3, row 1
-        Text chartTitle = new Text("Current Year");
-        chartTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        grid.add(chartTitle, 2, 0);
+        // Category in column 1, row 1
+        Text city = new Text(sCity + ", AL Weather");
+        city.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(city, 0, 0); 
         
-        // Subtitle in columns 2-3, row 2
-        Text chartSubtitle = new Text("Goods and Services");
-        grid.add(chartSubtitle, 1, 1, 2, 1);
+        Text currentTime = new Text("as of " + sTime + " CST");
+        currentTime.setFont(Font.font("Arial", FontWeight.LIGHT, 11));
+        grid.add(currentTime, 0, 1); 
+        
+        Text currentTemp = new Text(sTemp + "\u00B0");
+        currentTemp.setFont(Font.font("Arial", FontWeight.BOLD, 55));
+        grid.add(currentTemp, 0, 2, 2, 3); 
+        
+        Text currentDesc = new Text(sCondition);
+        currentDesc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(currentDesc, 0, 5); 
+        
+        Text currentWeatherUpdate = new Text(sWeather + "\n\n\n\n\n\n\n");
+        currentWeatherUpdate.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        grid.add(currentWeatherUpdate, 0, 6); 
+         
+        Text currentForecast = new Text(sForecast + "\n");
+        currentForecast.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        grid.add(currentForecast, 0, 9);
+        
+        Text currentMorningAfternoonForecast = new Text("Morning\t\tAfternoon\n" + morningTemp + "\u00B0\t\t\t" 
+                + afternoonTemp + "\u00B0");
+        currentMorningAfternoonForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        grid.add(currentMorningAfternoonForecast, 0, 10);
+                   
+        Text currentEveningForecast = new Text("Evening\t\tOvernight\n" + eveningTemp + 
+                "\u00B0\t\t\t" + overnightTemp + "\u00B0");
+        currentEveningForecast.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        grid.add(currentEveningForecast, 1, 10);
         
         // House icon in column 1, rows 1-2
-        String image_path = "sunny.png";
+        String image_path = sImage;
         try (InputStream stream = new FileInputStream(image_path)) {
             ImageView imageHouse = new ImageView(new Image(stream));
-            grid.add(imageHouse, 0, 0, 1, 2);
+            grid.add(imageHouse, 1, 2, 2, 3);
         }
 
-        grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(false);
+        
         return grid;
     }
     
+    private String sCity = "Huntsville";
+    private String sTime = "";
+    private String sTemp = "70";
+    private String sCondition = "Clear";
+    private String sWeather = "5% chance of rain through 8 pm";
+    private String sImage = "sunny.png";
+    private String sForecast = "Today's Forecast for \n" + sCity + ", AL";
+    private int morningTemp = 60; 
+    private int afternoonTemp = morningTemp + 6 ;
+    private int eveningTemp = morningTemp - 4;
+    private int overnightTemp = morningTemp - 14;
     
 }
-
