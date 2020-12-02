@@ -67,6 +67,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.*;
 
 /**
  * Weather application provides a map and weather data for select cities

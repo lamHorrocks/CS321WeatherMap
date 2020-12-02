@@ -1,2 +1,4 @@
+weathersystem\WeatherData.class
 module-info.class
-weathersystem/WeatherSystem.class
+weathersystem\APIParser.class
+weathersystem\WeatherSystem.class
