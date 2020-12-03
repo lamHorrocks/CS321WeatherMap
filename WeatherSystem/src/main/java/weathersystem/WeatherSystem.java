@@ -223,6 +223,9 @@ public class WeatherSystem extends Application {
         
     }
     
+    /**
+    * collects the data from the city forcast and sets it equal to the weather for the matching city 
+    */
     private void setWeather(String cityName){
         
         WeatherData cityData = parser.getCityForecast(cityName);
