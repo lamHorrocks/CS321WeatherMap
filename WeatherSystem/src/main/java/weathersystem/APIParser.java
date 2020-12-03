@@ -38,7 +38,7 @@ public class APIParser {
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             
             String jsonresponse = response.body();
-            System.out.println(jsonresponse);            
+                     
             var parser = JsonPath.parse(jsonresponse);
             
             temp = parser.read("$.main.temp", Double.class);
@@ -49,7 +49,7 @@ public class APIParser {
             clouds = parser.read("$.clouds.all", Double.class);
             description = parser.read("$.weather[0].description");
         } catch(Exception e){
-            System.out.println("ERROR: Could not retrieve data, try again in one minute\n" + e);
+           
         }
         
         WeatherData forecast = new WeatherData(temp, tempMin, tempMax, windSpeed, humidity, clouds, description);
