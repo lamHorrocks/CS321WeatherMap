@@ -30,7 +30,7 @@ public class APIParser {
         
         HttpRequest request = HttpRequest.newBuilder()
 		.uri(URI.create("https://community-open-weather-map.p.rapidapi.com/weather?q=" + cityName + "%2Cus&units=imperial"))
-		.header("x-rapidapi-key", "afc3bd4efdmshdf67d30ca639546p109a06jsn5b8c9519c0d7")
+		.header("x-rapidapi-key", "d684e917d3msh87ecd7c7d586ee4p17009ajsn1966fbdfe9f5")
 		.header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
 		.method("GET", HttpRequest.BodyPublishers.noBody())
 		.build();
