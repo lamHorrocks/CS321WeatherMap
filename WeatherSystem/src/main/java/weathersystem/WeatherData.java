@@ -6,7 +6,7 @@
 package weathersystem;
 
 /**
- *
+ * This class holds all the weatherdata that is collected from the api and sets the varaibles
  * @author Chad
  */
 public class WeatherData {
