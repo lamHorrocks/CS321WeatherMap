@@ -3,6 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * CS 321-02 Group 2 
+ * Weather Map 
+ * Dr. Stacy Lunkins
+ * This is the WeathSystem Package below
+ * As well this is where we use the API Parser for the data
+ * This is where the data is accessed from the Parse Server
+ */
 package weathersystem;
 
 import java.net.URI;
@@ -14,13 +22,19 @@ import java.util.*;
 import com.jayway.jsonpath.*;
 
 /**
- *
+ * This where we access the server to get the data we need for the cities we have chosen
  * @author Chad
  */
 public class APIParser {
-    
+/**
+ * This is where we set the string names for the cities we chose
+ */    
     private String cityNames[] = {"Florence", "Hamilton", "Decatur", "Cullman", "Huntsville", "Scottsboro", "Fort Payne", "Gadsden"};
-    
+ /**
+  * The getCityForcast below looks through the server for the names we have set as the private strings
+  * @param cityName we get this from the strings above
+  * @return this returns the data we set to retrieve from the server to the set variables
+  */    
     public WeatherData getCityForecast(String cityName){
         
         double temp = 0, tempMin = 0, tempMax = 0, windSpeed = 0, humidity = 0, clouds = 0;
