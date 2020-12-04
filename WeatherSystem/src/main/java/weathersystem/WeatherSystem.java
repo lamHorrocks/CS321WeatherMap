@@ -29,9 +29,17 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+/**
+ * CS 321-02 Group 2 
+ * Weather Map 
+ * Dr. Stacy Lunkins
+ * This is the WeatherSystem Package below
+ * This is where the application is formed, formatted and started to run
+ */
 package weathersystem;
-
+/**
+ * Below is where we import all the Panes, columns, images, buttons, text and font formatting.
+ */
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
