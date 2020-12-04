@@ -6,7 +6,7 @@
 /**
  * CS 321-02 Group 2 
  * Weather Map 
- * Dr. Stacy Lunkins
+ * Dr. Stacy Lukins
  * This is the WeathSystem Package below
  * As well this is where we use the API Parser for the data
  * This is where the data is accessed from the Parse Server
@@ -33,7 +33,7 @@ public class APIParser {
  /**
   * The getCityForcast below looks through the server for the names we have set as the private strings
   * @param cityName we get this from the strings above
-  * @return this returns the data we set to retrieve from the server to the set variables
+  * @return forecast, this returns the weather data we set to retrieve from the server to the set variables
   */    
     public WeatherData getCityForecast(String cityName){
         
@@ -70,7 +70,10 @@ public class APIParser {
         
         return forecast;
     }
-    
+    /**
+    * Get forecast for each city.
+    * @return forecasts, a list of weather data for each city.
+    */     
     public List<WeatherData> getMapForecast(){
         
         List<WeatherData> forecasts = new ArrayList<>();

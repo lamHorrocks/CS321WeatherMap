@@ -32,7 +32,7 @@
 /**
  * CS 321-02 Group 2 
  * Weather Map 
- * Dr. Stacy Lunkins
+ * Dr. Stacy Lukins
  * This is the WeatherSystem Package below
  * This is where the application is formed, formatted and started to run
  */
@@ -96,7 +96,8 @@ public class WeatherSystem extends Application {
 
     
 /**
- * Creates a grid for the map
+ * Creates a grid for the map.
+ * @return grid, a GridPane used to position cities relative to the map.
  */
     private GridPane addMapPane() throws IOException {
 
@@ -112,7 +113,6 @@ public class WeatherSystem extends Application {
             grid.add(imageMap, 4, 4);   
         }
               
-        //grid.setGridLinesVisible(true);
         return grid;
     }
 
@@ -120,7 +120,8 @@ public class WeatherSystem extends Application {
  * Creates an anchor pane using the provided grid and an HBox with buttons or 
  * hyperlinks and adds city links to map
  * 
- * @param grid Grid to anchor to the top of the anchor pane
+ * @param pane, a GridPane to anchor to the top of the anchor pane
+ * @return anchorpane, an AnchorPane used to position pane within the border.
  */
     private AnchorPane addCityPane(GridPane pane) {
 
@@ -183,7 +184,7 @@ public class WeatherSystem extends Application {
     }
     
  /**
- * Creates a weather pane for the map
+ * Creates a pane to list daily weather conditions for a given city.
  */
     private void addWeatherPane() {
         
@@ -232,7 +233,8 @@ public class WeatherSystem extends Application {
     }
     
     /**
-    * collects the data from the city forcast and sets it equal to the weather for the matching city 
+    * Collects the data from the city forecast and sets it equal to the weather for the matching city. 
+    * @param cityName, a String of the selected city.
     */
     private void setWeather(String cityName){
         

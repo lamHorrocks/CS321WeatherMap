@@ -6,14 +6,14 @@
 /**
  * CS 321-02 Group 2 
  * Weather Map 
- * Dr. Stacy Lunkins
+ * Dr. Stacy Lukins
  * This is the WeathData Package below
  * This is where the data is collected and stored from the API for the WeatherSystem to use
  */
 package weathersystem;
 
 /**
- * This class holds all the weatherdata that is collected from the api and sets the varaibles
+ * This class holds all the weatherdata that is collected from the API and sets the variables.
  * @author Chad
  */
 public class WeatherData {
@@ -47,41 +47,47 @@ public class WeatherData {
     }
 /**
  * Collects the Temperature Data from the API and returns it to the variable temp
- * @author Chad
+  * @return String, current temperature.
+  * @author Chad
  */    
     public double getTemp(){
         return this.temp;
     }
 /**
  * Collects the Temperature Minimum Data from the API and returns it to the variable tempMin
- * @author Chad
+  * @return String, minimum temperature of the day.
+  * @author Chad
  */      
     public double getTempMin(){
         return this.tempMin;
     }
 /**
  * Collects the Temperature Maximum Data from the API and returns it to the variable tempMax
- * @author Chad
+  * @return String, maximum temperature of the day.
+  * @author Chad
  */     
     public double getTempMax(){
         return this.tempMax;
     }
 /**
  * Collects the Wind Speed Data from the API and returns it to the variable windSpeed
- * @author Chad
+  * @return String, wind speed conditions.
+  * @author Chad
  */  
     public double getWindSpeed(){
         return this.windSpeed;
     }
 /**
  * Collects the Humidity Data from the API and returns it to the variable humidity
- * @author Chad
+  * @return String, humidity conditions.
+  * @author Chad
  */   
     public double getHumidity(){
         return this.humidity;
     }
 /**
  * Collects the Clouds Data from the API and returns it to the variable clouds
+ * @return String, cloud conditions.
  * @author Chad
  */    
     public double getClouds(){
@@ -89,6 +95,7 @@ public class WeatherData {
     }
 /**
  * Collects the description data as a string that is then returned to the description variable
+ * @return String, a description of the forecast conditions.
  * @author Chad
  */     
     public String getDescription(){
